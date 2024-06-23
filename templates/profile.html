@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil</title>
+    <!-- CKEditor CDN kullanarak yükleniyor -->
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+</head>
+<body>
+    <h2>Hoş Geldiniz, {{ username }}!</h2>
+    
+    <h3>Kayıtlı Metinleriniz:</h3>
+    <ul>
+        {% for text in texts %}
+            <li><a href="#" onclick="showText('{{ text.content }}')">{{ text.name }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <h3>Yeni Metin Kaydet:</h3>
+    <form action="/save_text" method="post">
+        <input type="text" name="text_name" placeholder="Metin Adı" required>
+        <!-- CKEditor kullanarak textarea alanını değiştirelim -->
+        <textarea id="user_text" name="user_text" placeholder="Metin içeriği"></textarea>
+        <script>
+            CKEDITOR.replace('user_text');
+        </script>
+        <button type="submit">Kaydet</button>
+    </form>
+    
+    <a href="/logout">Çıkış Yap</a>
+    <script>
+        function showText(text) {
+            console.log("Gelen veri:", text);
+            // CKEditor API'sini kullanarak metni textarea alanına aktar
+            CKEDITOR.instances['user_text'].setData(text);
+        }
+    </script>
+
+</body>
+</html>

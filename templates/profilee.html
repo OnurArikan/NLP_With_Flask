@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil</title>
+    <!-- CKEditor CDN ile yükleniyor -->
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+</head>
+<body>
+    <h2>Hoş Geldiniz, {{ username }}!</h2>
+    
+    <!-- Profil bilgileri -->
+    <p>Buraya profil bilgileri eklenebilir.</p>
+
+    <!-- CKEditor ile metin düzenleme alanı -->
+    <textarea id="editor" name="editor"></textarea>
+
+    <script>
+        // CKEditor'i metin düzenleme alanına yerleştirme
+        CKEDITOR.replace('editor');
+    </script>
+
+    <!-- Çıkış yapma bağlantısı -->
+    <a href="/logout">Çıkış Yap</a>
+</body>
+</html>

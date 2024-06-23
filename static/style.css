@@ -1,0 +1,493 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #6495ed;
+}
+
+h1 {
+    text-align: center;
+    color: #0c0a0a;
+}
+
+form {
+    /* background-color: #45a049; */
+    margin-top: 20px;
+    display: flex;
+    margin-bottom: 20px;
+    height: 650px;
+}
+
+.mainTextArea {
+    width: 100%;
+    height: 100%;
+}
+
+.mainTextDiv {
+    /* background-color: blue; */
+    display: inline-block;
+    margin-left: 2%;
+    width: 65%;
+}
+
+.spaceDiv {
+    /* background-color: aquamarine; */
+    width: 5%;
+}
+
+.selectedTextDiv {
+    /* background-color: red; */
+    display: inline-block;
+    width: 30%;
+    margin-top: 6.5%;
+    margin-right: 4%;
+}
+
+.selectedTextArea {
+    width: 100%;
+    height: 50%;
+}
+
+.answerTextArea {
+    width: 100%;
+    height: 60%;
+    background-color: #c793fb;
+    border-color: #f2f2f2;
+}
+
+.headerLabel {
+    height: 5%;
+}
+
+textarea {
+    /* width: 80%;  */
+    padding: 10px;
+    /* margin-bottom: 10px; */
+    border: 2px solid #ccc;
+    border-radius: 15px;
+    /* resize: none; */
+    font-family: Arial, sans-serif;
+    background-color: #ccc;
+}
+
+input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #a48888;
+    color: white;
+    border: black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+h2 {
+    color: #333;
+}
+
+p {
+    line-height: 1.6;
+    padding: 10px;
+    background-color: #ccc;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+button[class='actionButton'] {
+    display: none;
+}
+
+textarea[name='gosterilenMetin'] {
+    display: none;
+    background-color: aqua;
+}
+
+#ozelMenu {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+#ozelMenu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#ozelMenu li {
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#ozelMenu li:hover {
+    background-color: #f2f2f2;
+}
+
+/* Dropdown menü container'ı */
+.dropdown {
+    /* position: relative; */
+    display: inline-block;
+}
+
+/* Dropdown içeriği */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    margin-left: 25px;
+    border-radius: 0.5cm;
+}
+
+/* Dropdown içeriği içindeki bağlantılar */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Bağlantı üzerine gelindiğinde */
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Dropdown açıldığında */
+.show {
+    display: block;
+}
+
+/* Dropdown düğmesi */
+/* .dropbtn {
+    margin-left: 10%;
+    margin-top: 10%;
+    background-color: #616161;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+} */
+
+/* Dropdown düğmesine gelindiğinde */
+/* .dropbtn:hover {
+    background-color: #735d5d;
+} */
+
+.delete-form {
+    display: inline;
+    margin-left: 10px;
+}
+
+.delete-button {
+    background-color: #e76a83;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* .edit-button {
+    background-color: #00ff2f;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+} */
+
+
+.aktarBtn {
+    appearance: button;
+    background-color: #d2cb7f;
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, .15), rgba(255, 255, 255, 0));
+    border: 1px solid #d2cb7f;
+    border-radius: 1rem;
+    box-shadow: rgba(255, 255, 255, 0.15) 0 1px 0 inset, rgba(46, 54, 80, 0.075) 0 1px 1px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Inter, sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5;
+    padding: .5rem 1rem;
+    text-align: center;
+    text-transform: none;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+}
+
+.aktarBtn:focus:not(:focus-visible),
+.aktarBtn:focus {
+    outline: 0;
+}
+
+.aktarBtn:hover {
+    background-color: #e76a83;
+    border-color: #e76a83;
+}
+
+.aktarBtn:focus {
+    background-color: #413FC5;
+    border-color: #3E3BBA;
+    box-shadow: rgba(255, 255, 255, 0.15) 0 1px 0 inset, rgba(46, 54, 80, 0.075) 0 1px 1px, rgba(104, 101, 235, 0.5) 0 0 0 .2rem;
+}
+
+.aktarBtn:active {
+    background-color: #3E3BBA;
+    background-image: none;
+    border-color: #3A38AE;
+    box-shadow: rgba(46, 54, 80, 0.125) 0 3px 5px inset;
+}
+
+.aktarBtn:active:focus {
+    box-shadow: rgba(46, 54, 80, 0.125) 0 3px 5px inset, rgba(104, 101, 235, 0.5) 0 0 0 .2rem;
+}
+
+.aktarBtn:disabled {
+    background-image: none;
+    box-shadow: none;
+    opacity: .65;
+    pointer-events: none;
+}
+
+.dropbtn {
+    margin-left: 16%;
+    margin-top: 5%;
+    appearance: button;
+    background-color: #d2cb7f;
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, .15), rgba(255, 255, 255, 0));
+    border: 1px solid #d2cb7f;
+    border-radius: 1rem;
+    box-shadow: rgba(255, 255, 255, 0.15) 0 1px 0 inset, rgba(46, 54, 80, 0.075) 0 1px 1px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Inter, sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5;
+    padding: .5rem 1rem;
+    text-align: center;
+    text-transform: none;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    height: 60px;
+    width: 200px;
+}
+
+.dropbtn:focus:not(:focus-visible),
+.dropbtn:focus {
+    outline: 0;
+}
+
+.dropbtn:hover {
+    background-color: #e76a83;
+    border-color: #e76a83;
+}
+
+.dropbtn:focus {
+    background-color: #413FC5;
+    border-color: #3E3BBA;
+    box-shadow: rgba(255, 255, 255, 0.15) 0 1px 0 inset, rgba(46, 54, 80, 0.075) 0 1px 1px, rgba(104, 101, 235, 0.5) 0 0 0 .2rem;
+}
+
+.dropbtn:active {
+    background-color: #3E3BBA;
+    background-image: none;
+    border-color: #3A38AE;
+    box-shadow: rgba(46, 54, 80, 0.125) 0 3px 5px inset;
+}
+
+.dropbtn:active:focus {
+    box-shadow: rgba(46, 54, 80, 0.125) 0 3px 5px inset, rgba(104, 101, 235, 0.5) 0 0 0 .2rem;
+}
+
+.dropbtn:disabled {
+    background-image: none;
+    box-shadow: none;
+    opacity: .65;
+    pointer-events: none;
+}
+
+.submitInput {
+    width: 100%; /* Genişliği tamamen doldurması için */
+    padding: 10px; /* İç boşluk */
+    font-size: 16px; /* Yazı tipi boyutu */
+    border: 1px solid #ccc; /* Kenarlık */
+    border-radius: 5px; /* Kenar yuvarlama */
+    box-sizing: border-box; /* Kutu modeli */
+    margin-bottom: 10px; /* Altta boşluk */
+}
+
+/* Placeholder stilleri */
+.submitInput::placeholder {
+    color: #999; /* Renk */
+    font-style: italic; /* İtalik */
+}
+
+.kaydetBtn {
+    margin-bottom: 1%;
+    appearance: button;
+    background-color: #e76a83;
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, .15), rgba(255, 255, 255, 0));
+    border: 1px solid #e76a83;
+    border-radius: 1rem;
+    box-shadow: rgba(255, 255, 255, 0.15) 0 1px 0 inset, rgba(46, 54, 80, 0.075) 0 1px 1px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Inter, sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5;
+    padding: .5rem 1rem;
+    text-align: center;
+    text-transform: none;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+}
+
+.kaydetBtn:focus:not(:focus-visible),
+.kaydetBtn:focus {
+    outline: 0;
+}
+
+.kaydetBtn:hover {
+    background-color: #d2cb7f;
+    border-color: #d2cb7f;
+}
+
+.kaydetBtn:focus {
+    background-color: #413FC5;
+    border-color: #3E3BBA;
+    box-shadow: rgba(255, 255, 255, 0.15) 0 1px 0 inset, rgba(46, 54, 80, 0.075) 0 1px 1px, rgba(104, 101, 235, 0.5) 0 0 0 .2rem;
+}
+
+.kaydetBtn:active {
+    background-color: #3E3BBA;
+    background-image: none;
+    border-color: #3A38AE;
+    box-shadow: rgba(46, 54, 80, 0.125) 0 3px 5px inset;
+}
+
+.kaydetBtn:active:focus {
+    box-shadow: rgba(46, 54, 80, 0.125) 0 3px 5px inset, rgba(104, 101, 235, 0.5) 0 0 0 .2rem;
+}
+
+.kaydetBtn:disabled {
+    background-image: none;
+    box-shadow: none;
+    opacity: .65;
+    pointer-events: none;
+}
+
+
+.logoutBtn {
+    margin-left: 2%;
+    appearance: button;
+    background-color: #6fff9d;
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, .15), rgba(255, 255, 255, 0));
+    border: 1px solid #6fff9d;
+    border-radius: 1rem;
+    box-shadow: rgba(255, 255, 255, 0.15) 0 1px 0 inset, rgba(46, 54, 80, 0.075) 0 1px 1px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Inter, sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5;
+    padding: .5rem 1rem;
+    text-align: center;
+    text-transform: none;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    width: 150px;
+}
+
+.logoutBtn:focus:not(:focus-visible),
+.logoutBtn:focus {
+    outline: 0;
+}
+
+.logoutBtn:hover {
+    background-color: #d2cb7f;
+    border-color: #d2cb7f;
+}
+
+.logoutBtn:focus {
+    background-color: #413FC5;
+    border-color: #3E3BBA;
+    box-shadow: rgba(255, 255, 255, 0.15) 0 1px 0 inset, rgba(46, 54, 80, 0.075) 0 1px 1px, rgba(104, 101, 235, 0.5) 0 0 0 .2rem;
+}
+
+.logoutBtn:active {
+    background-color: #3E3BBA;
+    background-image: none;
+    border-color: #3A38AE;
+    box-shadow: rgba(46, 54, 80, 0.125) 0 3px 5px inset;
+}
+
+.logoutBtn:active:focus {
+    box-shadow: rgba(46, 54, 80, 0.125) 0 3px 5px inset, rgba(104, 101, 235, 0.5) 0 0 0 .2rem;
+}
+
+.logoutBtn:disabled {
+    background-image: none;
+    box-shadow: none;
+    opacity: .65;
+    pointer-events: none;
+}
+
+#loading-circle {
+    border: 5px solid #f3f3f3; /* Gri sınır */
+    border-top: 5px solid #ff0000; /* Mavi sınır */
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite; /* Dönme animasyonu */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -15px; /* Yükseklik / 2 */
+    margin-left: -15px; /* Genişlik / 2 */
+    z-index: 9999; /* Diğer öğelerin üstünde görüntüleme */
+    display: none; /* Başlangıçta gizli */
+}
+
+/* Dönme animasyonu */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

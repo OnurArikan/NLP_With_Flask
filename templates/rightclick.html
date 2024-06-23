@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Metin Seçme</title>
+    <style>
+
+    </style>
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+    <script>
+        var metinAlaniMetni = "";
+        /* Dropdownu açma fonksiyonu */
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+        /* Dışarı tıklandığında dropdownu kapatma */
+        window.onclick = function (event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <div id="loading-circle"></div>
+    <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn">Kayıtlı Metinlerim</button>
+        <div id="myDropdown" class="dropdown-content">
+            {% for text in texts %}
+            <div class="text-item">
+                <a href="#" onclick="showText('{{ text.content }}', '{{ text.name }}')">{{ text.name }}</a>
+                <form action="/delete_text" method="post" class="delete-form"
+                    onsubmit="return confirmDelete('{{ text.name }}')">
+                    <input type="hidden" name="text_name" value="{{ text.name }}">
+                    <button type="submit" class="delete-button">Sil</button>
+                </form>
+                <!-- <button onclick="editText('{{ text.name }}')" class="edit-button">Düzenle</button> -->
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <form method="post" onsubmit="return validateForm()">
+        <div class="mainTextDiv">
+            <input class="submitInput" type="text" name="text_name" id="textName" placeholder="Metin Adı"
+                value="{{text_name}}">
+            <button class="kaydetBtn" type="submit" name="action" value="kayit">Kaydet</button>
+            <textarea class="mainTextArea" id="metinAlani" name="metinAlani" rows="4" cols="50">{{main_text}}</textarea>
+            <script>
+                CKEDITOR.replace('metinAlani', {
+                    height: '450px',
+                    on: {
+                        instanceReady: function (evt) {
+                            var editor = evt.editor;
+                            editor.addMenuGroup('customGroup');
+                            editor.addMenuItem('customItem',
+                                {
+                                    label: 'Get Summary',
+                                    command: 'getSummary',
+                                    group: 'customGroup',
+                                }
+                            );
+                            editor.addMenuItem('customItem2',
+                                {
+                                    label: 'Get Question',
+                                    command: 'getQuestion',
+                                    group: 'customGroup',
+                                }
+                            );
+                            editor.addMenuItem('customItem8',
+                                {
+                                    label: 'Get a Title',
+                                    command: 'getTitle',
+                                    group: 'customGroup',
+                                }
+                            );
+                            editor.addMenuItem('customItem9',
+                                {
+                                    label: 'Spelling Correction',
+                                    command: 'spellingCorrection',
+                                    group: 'customGroup',
+                                }
+                            );
+                            editor.addMenuItem('customItem6',
+                                {
+                                    label: 'Key Word Extraction',
+                                    command: 'keyWord',
+                                    group: 'customGroup',
+                                }
+                            );
+                            editor.addMenuItem('customItem7',
+                                {
+                                    label: 'Paraphrase',
+                                    command: 'paraphrase',
+                                    group: 'customGroup',
+                                }
+                            );
+                            editor.addMenuItem('customItem8',
+                                {
+                                    label: 'Grammar Correction',
+                                    command: 'grammarCorrection',
+                                    group: 'customGroup',
+                                }
+                            );
+                            editor.addMenuItem('customItem3', {
+                                label: 'Translate',
+                                command: 'translateCommand',
+                                group: 'customGroup',
+                                getItems: function () {
+                                    var items = {};
+                                    items['translateOption1'] = {
+                                        label: 'Option 1',
+                                        command: 'translateOption1Command'
+                                    };
+                                    items['translateOption2'] = {
+                                        label: 'Option 2',
+                                        command: 'translateOption2Command'
+                                    };
+                                    return items;
+                                }
+                            });
+                            editor.addMenuItem('customItem4',
+                                {
+                                    label: '•  English to Turkish',
+                                    command: 'englishToTurkish',
+                                    group: 'customGroup',
+                                }
+                            );
+                            editor.addMenuItem('customItem5',
+                                {
+                                    label: '•  Turkish to English',
+                                    command: 'turkishToEnglish',
+                                    group: 'customGroup',
+                                }
+                            );
+                            editor.addCommand('getSummary', {
+                                exec: function (editor) {
+                                    document.querySelector("button[value='first_action']").click();
+                                    document.getElementById('loading-circle').style.display = 'block';
+                                }
+                            });
+                            editor.addCommand('getQuestion', {
+                                exec: function (editor) {
+                                    document.querySelector("button[value='second_action']").click();
+                                    document.getElementById('loading-circle').style.display = 'block';
+                                }
+                            });
+                            editor.addCommand('getTitle', {
+                                exec: function (editor) {
+                                    document.querySelector("button[value='third_action']").click();
+                                    document.getElementById('loading-circle').style.display = 'block';
+                                }
+                            });
+                            editor.addCommand('spellingCorrection', {
+                                exec: function (editor) {
+                                    document.querySelector("button[value='fourth_action']").click();
+                                    document.getElementById('loading-circle').style.display = 'block';
+                                }
+                            });
+                            editor.addCommand('keyWord', {
+                                exec: function (editor) {
+                                    document.querySelector("button[value='fifth_action']").click();
+                                    document.getElementById('loading-circle').style.display = 'block';
+                                }
+                            });
+                            editor.addCommand('paraphrase', {
+                                exec: function (editor) {
+                                    document.querySelector("button[value='sixth_action']").click();
+                                    document.getElementById('loading-circle').style.display = 'block';
+                                }
+                            });
+                            editor.addCommand('grammarCorrection', {
+                                exec: function (editor) {
+                                    document.querySelector("button[value='seventh_action']").click();
+                                    // Döner yüklenme çemberini göster
+                                    document.getElementById('loading-circle').style.display = 'block';
+
+                                    // // grammarCorrection işlemini gerçekleştir
+                                    // grammar(selected_text)[0]['generated_text'].then(function (result) {
+                                    //     // İşlem tamamlandığında, sonucu işle ve ekranda göster
+                                    //     document.getElementById('loading-circle').style.display = 'none'; // Yüklenme çemberini gizle
+                                    //     document.getElementById('resultText').value = result;
+                                    // }).catch(function (error) {
+                                    //     // Hata durumunda işlemleri burada ele alabilirsiniz
+                                    //     console.error('Bir hata oluştu:', error);
+                                    //     document.getElementById('loading-circle').style.display = 'none'; // Yüklenme çemberini gizle
+                                    //     alert('İşlem sırasında bir hata oluştu. Lütfen tekrar deneyin.');
+                                    // });
+                                }
+                            });
+                            editor.addCommand('englishToTurkish', {
+                                exec: function (editor) {
+                                    document.querySelector("button[value='eighth_action']").click();
+                                    document.getElementById('loading-circle').style.display = 'block';
+                                }
+                            });
+                            editor.addCommand('turkishToEnglish', {
+                                exec: function (editor) {
+                                    document.querySelector("button[value='ninth_action']").click();
+                                    document.getElementById('loading-circle').style.display = 'block';
+                                }
+                            });
+                            editor.addCommand('translateCommand', {
+                                exec: function (editor) {
+                                    console.log('Translate command executed');
+                                }
+                            });
+                            editor.addCommand('translateOption1Command', {
+                                exec: function (editor) {
+                                    console.log('Translate Option 1 command executed');
+                                }
+                            });
+                            editor.addCommand('translateOption2Command', {
+                                exec: function (editor) {
+                                    console.log('Translate Option 2 command executed');
+                                }
+                            });
+
+                            editor.contextMenu.addListener(function (element) {
+                                var items = {};
+                                items['customItem'] = CKEDITOR.TRISTATE_OFF;
+                                items['customItem2'] = CKEDITOR.TRISTATE_OFF;
+                                items['customItem3'] = CKEDITOR.TRISTATE_OFF;
+                                items['customItem4'] = CKEDITOR.TRISTATE_OFF;
+                                items['customItem5'] = CKEDITOR.TRISTATE_OFF;
+                                items['customItem6'] = CKEDITOR.TRISTATE_OFF;
+                                items['customItem7'] = CKEDITOR.TRISTATE_OFF;
+                                items['customItem8'] = CKEDITOR.TRISTATE_OFF;
+                                items['customItem9'] = CKEDITOR.TRISTATE_OFF;
+                                items['customItem10'] = CKEDITOR.TRISTATE_OFF;
+                                return items;
+                            });
+                        }
+                    }
+                });
+
+                function showSelectedText() {
+                    var editor = CKEDITOR.instances.metinAlani;
+                    var selectedText = editor.getSelection().getSelectedText();
+                    document.getElementById('gosterilenMetin').value = selectedText;
+                }
+
+                // Fonksiyonu mouseup olayına bağlayın
+                CKEDITOR.instances.metinAlani.on('selectionChange', showSelectedText);
+
+            </script>
+
+        </div>
+        <div class="spaceDiv"></div>
+        <div class="selectedTextDiv">
+            <!-- <label for="gosterilenMetin">Seçilen Metin:</label> -->
+            <!-- <input type="text" id="gosterilenMetinn" name="gosterilenMetinn" value="{{ selected_text }}"> -->
+            <textarea class="selectedTextArea" type="text" id="gosterilenMetin" name="gosterilenMetin"
+                value="{{ selected_text }}">{{ selected_text }}</textarea>
+            <button class="actionButton" type="submit" name="action" value="first_action">Get a Summary</button>
+            <button class="actionButton" type="submit" name="action" value="second_action">Generate a Question</button>
+            <button class="actionButton" type="submit" name="action" value="third_action">Generate a Title</button>
+            <button class="actionButton" type="submit" name="action" value="fourth_action">Spelling Correction</button>
+            <button class="actionButton" type="submit" name="action" value="fifth_action">Key Word</button>
+            <button class="actionButton" type="submit" name="action" value="sixth_action">Paraphrase</button>
+            <button class="actionButton" type="submit" name="action" value="seventh_action">Grammar Correction</button>
+            <button class="actionButton" type="submit" name="action" value="eighth_action">English to Turkish</button>
+            <button class="actionButton" type="submit" name="action" value="ninth_action">Turkish to English</button>
+            <label class="headerLabel">{{header}}</label>
+            <textarea class="answerTextArea" id="resultText">{{ result }}</textarea>
+            <button class="aktarBtn" type="button" onclick="insertTextHere('Emir\'in Ayakkabıları')"> Transfer </button>
+        </div>
+    </form>
+
+    <button type="button" class="logoutBtn" onclick="logout()">Çıkış Yap</button>
+
+    <!-- Özel menü -->
+    <div id="ozelMenu">
+        <ul>
+            <li data-action="get_summary">Get Summary</li>
+            <li data-action="generate_question">Generate Question</li>
+        </ul>
+    </div>
+    <script>
+        function showText(textContent, textName) {
+            console.log("Gelen veri:", textContent);
+            // CKEditor API'sini kullanarak metni textarea alanına aktar
+            document.getElementById("textName").value = textName;
+            CKEDITOR.instances['metinAlani'].setData(textContent);
+        }
+        function insertTextHere(text) {
+            // console.log("Gelen veri:", text);
+            var resultValue = document.getElementById('resultText').value;
+            // alert(resultValue);
+            CKEDITOR.instances['metinAlani'].insertHtml("<p>" + resultValue + "</p>");
+        }
+        // function editText(textName) {
+        //     // yapacam bir şeyler
+        //     document.getElementById("textName").value = textName;
+        //     CKEDITOR.instances['metinAlani'].setData(textName);
+        // }
+        function validateForm() {
+            var action = document.activeElement.value; // Hangi düğmeye basıldığını al
+            if (action === "kayit") {
+                var textName = document.getElementById("textName").value;
+                var existingTextNames = Array.from(document.querySelectorAll(".text-item a")).map(a => a.innerText);
+                if (existingTextNames.includes(textName)) {
+                    // Eğer isim zaten varsa, kullanıcıya onay iletişim kutusu göster
+                    if (!confirm("Bu isimde bir metin zaten mevcut. Üzerine yazmak istiyor musunuz?")) {
+                        return false; // İptal edildiği durumda formun gönderilmesini engelle
+                    }
+                }
+            } else if (action === "düzenle") {
+                // Düzenleme düğmesine basıldığında, herhangi bir işlem yapmadan formun gönderilmesine izin ver
+                return true;
+            }
+            // Diğer düğmelere basıldığında doğrudan formun gönderilmesine izin ver
+            return true;
+        }
+        function confirmDelete(text) {
+            var result = confirm(text + " adlı metni silmek istediğinize emin misiniz?");
+            return result
+        }
+        function logout() {
+            window.location.href = "/logout";
+        }
+
+    </script>
+</body>
+
+</html>
